@@ -20,7 +20,9 @@ class ExpressSessionMiddleware extends Middleware {
     })
   }
 
-  async init() {}
+  async init() {
+    this.pipelines.push({ pipe: (...args) => this.pipe(...args) })
+  }
 
   pipe(req, res, next) {
     this.expressSession(req, res, () => {
